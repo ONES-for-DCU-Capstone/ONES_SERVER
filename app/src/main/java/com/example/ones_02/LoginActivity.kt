@@ -14,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     //회원가입
@@ -34,6 +35,10 @@ class LoginActivity : AppCompatActivity() {
         google_login_button.setOnClickListener{
             //First step
             googleLogin()
+        }
+
+        signup_button.setOnClickListener{
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
 
         var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -102,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
                             }
         }
     }
+
     fun signinEmail(){
         val edittext_id = findViewById<EditText>(R.id.edittext_id)
         val edittext_password = findViewById<EditText>(R.id.edittext_password)

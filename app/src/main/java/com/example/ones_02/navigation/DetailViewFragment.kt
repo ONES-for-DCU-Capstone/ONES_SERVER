@@ -4,6 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_detail.view.*
-import kotlinx.android.synthetic.main.item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
 class DetailViewFragment : Fragment() {
@@ -107,6 +107,11 @@ class DetailViewFragment : Fragment() {
 //            viewholder.chat_btn.setOnClickListener {
 //                chat_btnEvent(p1)
 //            }
+
+            p0.itemView.setOnClickListener{
+//                startActivity(Intent(activity, ActivityPostView::class.java))
+            }
+
             //p0.itemView = chat_btn  <- p0.itemView는 전체 테이블을 의미
             viewholder.chat_btn.setOnClickListener(View.OnClickListener { view ->
                 val intent = Intent(view.context, ChatRoomActivity::class.java)
@@ -119,9 +124,20 @@ class DetailViewFragment : Fragment() {
                         R.anim.fromright,
                         R.anim.toleft
                     )
-                    startActivity(intent, activityOptions.toBundle())
-                }
 
+                    Log.d("uid", "$uid")
+                    Log.d("ui2", "${contentDTOs[p1].uid}")
+
+                    startActivity(intent, activityOptions.toBundle())
+
+                    //당근 마켓 처럼 자신의 게시글인 경우에는 채팅대화방 보기 버튼을 하고 싶은데.. 그건 아직..
+//                    if( uid == contentDTOs[p1].uid ){
+//                        Snackbar.make(view, "본인이 등록한 아이템입니다.", Snackbar.LENGTH_LONG).show()
+//                    }
+//                    else{
+//                        startActivity(intent, activityOptions.toBundle())
+//                    }
+                }
             })
 
 //            holder.itemView.setOnClickListener(View.OnClickListener { view ->
