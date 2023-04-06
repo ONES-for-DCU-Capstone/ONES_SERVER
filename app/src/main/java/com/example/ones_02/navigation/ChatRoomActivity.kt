@@ -191,7 +191,7 @@ class ChatRoomActivity : AppCompatActivity() {
                 holder.layout_main.gravity = Gravity.RIGHT
             }else{ // 상대방 채팅
                 Glide.with(holder.itemView.context)
-                    .load(userDTO?.profileImages)
+                    .load(userDTO?.profileImage)
                     .apply(RequestOptions().circleCrop())
                     .into(holder.imageView_profile)
                 holder.textView_name.text = userDTO?.nickname
