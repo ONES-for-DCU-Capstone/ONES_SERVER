@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBFBFB"
+    android:orientation="vertical"
+    android:id="@+id/activity_post_view">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/post_view_btn_back"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="left|center"
+            android:src="@drawable/img_ic_backbtn"
+            android:background="#00FFFFFF"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" /> <!--정렬용 여백-->
+
+        <ImageButton
+            android:id="@+id/post_view_btn_more"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="right|center"
+            android:src="@drawable/img_ic_morebtn"
+            android:background="#00FFFFFF"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3E3E3"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="610dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/post_view_btn_user_profile"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="centerInside"
+                    android:background="@drawable/shape_profilebtn_circle"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/post_view_text_user_name"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/nanumbarungothic"
+                        android:textSize="20sp"
+                        android:text="닉네임"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/post_view_text_wrt_time"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/nanumbarungothic"
+                        android:text="올린 시간"
+                        android:textColor="#FF898989" />
+
+
+                </LinearLayout>
+
+            </LinearLayout> <!-- 글쓴이 정보 -->
+
+
+            <ImageView
+                android:id="@+id/post_view_img_picture"
+
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_post_view_ex"
+                android:background="@drawable/shape_img_circleview"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/post_view_title"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumbarungothic"
+                        android:textSize="24sp"
+                        android:layout_gravity="left|center"
+                        android:text="제목"
+                        android:textColor="#000000" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" /> <!--정렬용 여백-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:layout_marginTop="2dp"
+                        android:textSize="11sp"
+                        android:fontFamily="@font/nanumbarungothic"
+                        android:text="조회수"
+                        android:textColor="#FF898989" />
+                    <TextView
+                        android:id="@+id/post_view_watched"
+
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textSize="11sp"
+                        android:fontFamily="@font/nanumbarungothic"
+                        android:text="1"
+                        android:textColor="#FF898989" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/post_view_content"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:text="내용"
+                    android:textColor="#FF898989" />
+            </LinearLayout> <!-- 글 내용 -->
+
+        </LinearLayout> <!-- 글 -->
+
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3E3E3"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/post_view_price"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumbarungothic"
+            android:textSize="18sp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="left|center"
+            android:text="10000원(가격)"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" /> <!--정렬용 여백-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/post_view_chat"
+
+
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:fontFamily="@font/nanumbarungothic"
+            android:textSize="16sp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="left|center"
+            android:text="채팅하기"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="@drawable/shape_greenbtn"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+
+
+    </LinearLayout> <!-- 하단바 -->
+
+
+</LinearLayout>

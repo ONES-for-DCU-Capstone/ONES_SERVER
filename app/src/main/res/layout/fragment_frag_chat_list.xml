@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FragChatList">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="채팅"
+            android:layout_gravity="center_vertical"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" /> <!-- 우측 정렬을 위한 빈 레이어 -->
+        <ImageButton
+            android:id="@+id/chatlist_btn_alarm"
+
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:layout_gravity="right"
+
+            android:src="@drawable/img_ic_alarm"
+            android:background="#00FFFFFF" /> <!-- 알림 버튼 -->
+
+    </LinearLayout> <!-- 상단바 -->
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E1E1E1"
+        android:layout_marginBottom="8dp"/> <!-- 구분선 -->
+
+    <LinearLayout
+        android:id="@+id/chatlist_chat_table"
+
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"> <!-- 채팅 테이블 -->
+
+        <ImageButton
+            android:id="@+id/chatlist_img_user"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/img_ic_alarmbg"
+            android:background="#00ffffff"/> <!-- 유저 프로필 사진 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chatlist_text_username"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00ffffff"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:textSize="20sp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:text="유저 이름" /> <!-- 유저 이름-->
+
+                <TextView
+                    android:id="@+id/chatlist_text_send_time"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:background="#00ffffff"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:textSize="13sp"
+                    android:textColor="#FF898989"
+                    android:text="n" /> <!-- 알림 내용-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00ffffff"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:textSize="13sp"
+                    android:textColor="#FF898989"
+                    android:text="분 전" /> <!-- 알림 내용-->
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/chatlist_text_content"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00ffffff"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nanumbarungothic"
+                android:textSize="18sp"
+                android:textColor="#808080"
+                android:text="안녕하세요" /> <!-- 채팅 내용-->
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E1E1E1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"/> <!-- 구분선 -->
+
+
+</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#E1E1E1"
+        android:layout_marginBottom="8dp"/> <!-- 구분선 -->
+</LinearLayout>
