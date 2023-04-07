@@ -90,9 +90,17 @@ class ChatRoomActivity : AppCompatActivity() {
                     .addOnSuccessListener { documentReference ->
                         //채팅방 생성
                         checkChatRoom()
+
+                        Log.d("유저222", "$uid")
+
+                        Log.d("유저documentfeferenccc", "${documentReference.id}")
+                        Log.d("유저uid222", "$uid")
                         //메세지 보내기
                         Handler().postDelayed({
+//                            println("ddddddddd")
                             println(documentReference.id)
+
+
                             chatRoomsRef.document(documentReference.id).collection("comments").add(comment)
                             chatmessageEditText.text = null
                         }, 1000L)

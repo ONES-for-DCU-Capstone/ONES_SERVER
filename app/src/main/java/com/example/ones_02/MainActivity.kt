@@ -34,30 +34,30 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        setToolbarDefault()
+//        setToolbarDefault()
         when(item.itemId){
-            R.id.action_home ->{
+            R.id.main_menu_post_feed ->{
                 var detailViewFragment = DetailViewFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content, detailViewFragment).commit()
                 return true
             }
-            R.id.action_search ->{
+            R.id.main_menu_map ->{
                 var gridFragment = GridFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content, gridFragment).commit()
                 return true
             }
-            R.id.action_add_photo ->{
+            R.id.main_menu_search ->{
                 if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
                     startActivity(Intent(this,AddPhotoActivity::class.java))
                 }
                 return true
             }
-            R.id.action_chat ->{
+            R.id.main_menu_chat ->{
                 var chatFragment = ChatListFragment()
 //                supportFragmentManager.beginTransaction().replace(R.id.main_content,chatFragment).commit()
                 return true
             }
-            R.id.action_account ->{
+            R.id.main_menu_profile ->{
                 var userFragment = UserFragment()
                 var bundle = Bundle()
                 var uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -70,11 +70,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         return false
     }
-    fun setToolbarDefault(){
-        toolbar_username.visibility = View.GONE
-        toolbar_btn_back.visibility = View.GONE
-        toolbar_title_image.visibility = View.GONE
-    }
+//    fun setToolbarDefault(){
+//        toolbar_username.visibility = View.GONE
+//        toolbar_btn_back.visibility = View.GONE
+//        toolbar_title_image.visibility = View.GONE
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

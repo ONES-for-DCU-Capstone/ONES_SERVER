@@ -81,6 +81,9 @@ class AddPhotoActivity : AppCompatActivity() {
             }?.addOnSuccessListener { uri ->
                 var contentDTO = ContentDTO()
 
+                val postid = firestore?.collection("images")
+
+
                 //Insert downloadUrl of image
                 contentDTO.imageUri = uri.toString()
 
@@ -95,7 +98,11 @@ class AddPhotoActivity : AppCompatActivity() {
 
                 contentDTO.timestamp = System.currentTimeMillis()
 
-                firestore?.collection("images")?.document()?.set(contentDTO)
+
+                val postId = firestore?.collection("images")?.document()?.id
+                contentDTO.id = postId
+
+                firestore?.collection("images")?.document(postId.toString())?.set(contentDTO)
 
                 setResult(Activity.RESULT_OK)
                 finish()

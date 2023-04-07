@@ -1,79 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FBFBFB"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp">-->
-<!--            <ImageView-->
-<!--                android:id="@+id/profile_imageview"-->
-<!--                android:layout_width="35dp"-->
-<!--                android:layout_height="35dp"-->
-<!--                android:layout_margin="7.5dp"-->
-<!--                />-->
-<!--            <TextView-->
-<!--                android:id="@+id/profile_textview"-->
-<!--                android:layout_gravity="center_vertical"-->
-<!--                android:text="you6878@icloud.com"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"/>-->
-<!--        </LinearLayout>-->
-        <ImageView
-            android:scaleType="centerCrop"
-            android:id="@+id/content_imageview"
-            android:layout_width="200dp"
-            android:layout_height="200dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/pl">
 
         <LinearLayout
+            android:id="@+id/post_feed_product_table"
+
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-            <ImageView
-                android:id="@+id/favorite_imageview"
-                android:src="@drawable/ic_favorite_border"
-                android:layout_marginTop="7.5dp"
-                android:layout_marginLeft="7.5dp"
-                android:layout_width="35dp"
-                android:layout_height="35dp"/>
-            <ImageView
-                android:id="@+id/comment_imageview"
-                android:src="@drawable/ic_chat_black"
-                android:layout_marginTop="7.5dp"
-                android:layout_marginLeft="7.5dp"
-                android:layout_width="35dp"
-                android:layout_height="35dp"/>
-        </LinearLayout>
-        <TextView
-            android:text="Like 0"
-            android:id="@+id/like_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal"> <!-- 상품 테이블 -->
 
-        <TextView
-            android:text="위치"
-            android:id="@+id/location_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <!-- 상품 이미지-->
 
-        <TextView
-            android:text="title"
-            android:id="@+id/title_textview"
+            <ImageView
+                android:id="@+id/post_feed_product_img"
+
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/img_logout_bg"
+                android:scaleType="centerCrop"
+
+                android:src="@drawable/img_logout_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="17dp"
+                android:orientation="vertical"> <!--상품 내용 -->
+
+                <TextView
+                    android:id="@+id/post_feed_product_title"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="제목"
+                    android:textSize="21dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold" /> <!-- 제목 -->
+
+                <TextView
+                    android:id="@+id/post_feed_product_time"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="작성시간"
+                    android:textSize="13dp"
+                    android:textColor="#888888"
+                    android:textStyle="bold" /> <!-- 작성 시간-->
+
+                <TextView
+                    android:id="@+id/post_feed_product_price"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="가격"
+                    android:layout_gravity="right"
+                    android:textSize="21dp"
+                    android:textColor="#888888"
+                    android:textStyle="bold" /> <!-- 가격 -->
+
+
+                <LinearLayout
+                    android:id="@+id/post_feed_product_tag_table"
+
+                    android:layout_width="180dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="9dp"
+                    android:orientation="horizontal"> <!-- 태그 테이블 -->
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/post_feed_product_tag"
+
+                        android:layout_width="60dp"
+                        android:layout_height="28dp"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:text="#태그"
+                        android:textSize="15dp"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/shape_tagbox" /> <!-- 태그 박스 -->
+
+
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/chat_btt"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@android:drawable/sym_action_chat" />
+            </LinearLayout>
+        </LinearLayout> <!-- 상품 -->
+        <View
             android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="1dp"
+            android:background="#E1E1E1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"/> <!-- 구분선 -->
 
-<!--        <TextView-->
-<!--            android:text="Explain Content"-->
-<!--            android:id="@+id/explain_textview"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="80dp"/>-->
-
-        <ImageView
-            android:id="@+id/chat_btn"
-            android:src="@android:drawable/sym_action_chat"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"/>
+    </LinearLayout>
 
 </LinearLayout>

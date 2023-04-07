@@ -1,6 +1,10 @@
 package com.example.ones_02.navigation.model
 
-data class ContentDTO(var explain : String? = null, //설명 글
+import com.google.firebase.firestore.FirebaseFirestore
+
+data class ContentDTO(
+                      var id : String? = null,
+                      var explain : String? = null, //설명 글
                       var title : String? = null, //제목
                       var imageUri : String? = null,
                       var price : String? = null,

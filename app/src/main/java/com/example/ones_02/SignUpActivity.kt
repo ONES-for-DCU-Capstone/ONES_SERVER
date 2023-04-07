@@ -38,6 +38,17 @@ class SignUpActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
+
+//        val addphoto_btn_upload = findViewById<Button>(R.id.addphoto_btn_upload)
+        join_edittext_name = findViewById(R.id.join_edittext_name)
+        join_edittext_nickname = findViewById(R.id.join_edittext_nickname)
+        join_btn_Nickname_check = findViewById(R.id.join_btn_Nickname_check)
+        join_edittext_email = findViewById(R.id.join_edittext_email)
+        join_edittext_PW = findViewById(R.id.join_edittext_PW)
+        join_edittext_PW_check = findViewById(R.id.join_edittext_PW_check)
+        join_btn_PW_check = findViewById(R.id.join_btn_PW_check)
+        join_btn_Signup = findViewById(R.id.join_btn_Signup)
+
         join_btn_Nickname_check.setOnClickListener {
             checkNickname()
         }
@@ -98,7 +109,7 @@ class SignUpActivity : AppCompatActivity() {
         val email = join_edittext_email.text.toString()
         val password = join_edittext_PW.text.toString()
         val confirmPassword = join_edittext_PW_check.text.toString()
-        val phoneNumber = join_edittext_PH.text.toString()
+//        val phoneNumber = join_edittext_PH.text.toString()
 
         // Check if all fields are filled out   // || phoneNumber.isEmpty()
         if (name.isEmpty() || nickname.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() ) {
@@ -113,10 +124,10 @@ class SignUpActivity : AppCompatActivity() {
             ?.addOnSuccessListener { result ->
                 if (result.isEmpty) {
                     // Nickname is available, create a new user account using Firebase Authentication
-                    auth?.createUserWithEmailAndPassword(nickname, password)
+                    auth?.createUserWithEmailAndPassword(email, password)
                         ?.addOnSuccessListener { authResult ->
                             // Save user data to Firestore
-                            val user = UserDTO(name, nickname, email, password )
+                            val user = UserDTO(name, nickname, email, password)
                             firestore?.collection("users")
                                 ?.document(authResult.user!!.uid)
                                 ?.set(user)

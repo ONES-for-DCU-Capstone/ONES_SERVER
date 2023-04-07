@@ -5,22 +5,29 @@
       <map>
         <entry key="app/src/main/res/drawable/shape_facebookloginbtn.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/shape_login_edittext.xml" value="0.168" />
+        <entry key="app/src/main/res/drawable/shape_tagbox.xml" value="0.1305" />
         <entry key="app/src/main/res/layout/activity_add_photo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_chatroom.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_join.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.17481884057971014" />
+        <entry key="app/src/main/res/layout/activity_post_view.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_post_wrt.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_alarm.xml" value="0.18020833333333333" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chatlist.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_frag_chat_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_frag_post_feed.xml" value="0.18110435663627153" />
         <entry key="app/src/main/res/layout/fragment_grid.xml" value="0.18020833333333333" />
+        <entry key="app/src/main/res/layout/fragment_postview.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.18020833333333333" />
         <entry key="app/src/main/res/layout/item_chat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_chatlist.xml" value="0.13677811550151975" />
-        <entry key="app/src/main/res/layout/item_detail.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_detail.xml" value="0.2977859497070312" />
         <entry key="app/src/main/res/menu/bottom_navigation_main.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.24351851851851852" />
       </map>
     </option>
   </component>

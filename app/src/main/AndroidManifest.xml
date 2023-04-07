@@ -18,10 +18,12 @@
 
 
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".navigation.PostViewFragment"
+            tools:ignore="Instantiatable" />
 
         <activity android:name=".navigation.ChatRoomActivity" />
         <activity android:name=".navigation.AddPhotoActivity" />
-        <activity android:name=".navigation.ActivityPostView" />
+<!--        <activity android:name=".navigation.ActivityPostView" />-->
 
         <activity
             android:name=".MainActivity"
