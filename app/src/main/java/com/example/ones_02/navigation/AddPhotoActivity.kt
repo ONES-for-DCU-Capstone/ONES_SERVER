@@ -3,9 +3,11 @@ package com.example.ones_02.navigation
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.widget.AppCompatButton
@@ -19,6 +21,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_photo.*
 import kotlinx.android.synthetic.main.activity_post_wrt.*
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,7 +42,7 @@ class AddPhotoActivity : AppCompatActivity() {
 
         //Open the album
         var photoPickerIntent = Intent(Intent.ACTION_PICK)
-        photoPickerIntent.type = "image/*"
+        photoPickerIntent.type= "image/*"
         startActivityForResult(photoPickerIntent, PICK_IMSGE_FROM_ALBUM)
 
         //add image upload event
@@ -54,105 +57,79 @@ class AddPhotoActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMSGE_FROM_ALBUM) {
             if (resultCode == Activity.RESULT_OK) {
-                //this is path to the selecte image
+        //this is path to the selecte image
                 photoUri = data?.data
 
-                val addphoto_image = findViewById<ImageView>(R.id.post_wrt_img_picture)
-                addphoto_image.setImageURI(photoUri)
+                post_wrt_img_picture.setImageURI(photoUri)
             } else {
-                //Exit the addPhotoActivity if you leave 사진촬영 취소시
+        //Exit the addPhotoActivity if you leave 사진촬영 취소시
                 finish()
             }
         }
     }
-        fun contentUpload(){
-            //make filename
+    fun contentUpload(){
+//make filename
 
-            //파일명 중복되지 않게 날짜로 이름생성
-            var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-            var imageFileName = "IMAGE_" + timestamp + "_.png"
+        //파일명 중복되지 않게 날짜로 이름생성
+        var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        var imageFileName = "IMAGE_" + timestamp + "_.png"
 
-            var storageRef = storage?.reference?.child("image")?.child(imageFileName)
-
-            //업로드 방식은 2가지 Promise method와 Callback method, 구글에서 Promis method를 더 선호
+        var storageRef = storage?.reference?.child("image")?.child(imageFileName)
 
 
-            //Promise method
-            storageRef?.putFile(photoUri!!)?.continueWithTask{ task: Task<UploadTask.TaskSnapshot> ->
-                return@continueWithTask storageRef.downloadUrl
-            }?.addOnSuccessListener { uri ->
-                var contentDTO = ContentDTO()
+        // compress image before uploading
+        val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, photoUri)
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        val data = baos.toByteArray()
 
+//업로드 방식은 2가지 Promise method와 Callback method, 구글에서 Promis method를 더 선호
 
-                val uid = FirebaseAuth.getInstance().currentUser?.uid
-                val docRef = FirebaseFirestore.getInstance().collection("users").document(uid!!)
-                docRef.get()
-                    .addOnSuccessListener { documentSnapshot ->
-                        if (documentSnapshot.exists()) {
-                            val nickname = documentSnapshot.getString("nickname")
-                            Log.d("Name", " $nickname")
-                            contentDTO.usernickname = nickname.toString()
+        //Promise method
+        storageRef?.putBytes(data)?.continueWithTask{task: Task<UploadTask.TaskSnapshot>->
+            return@continueWithTask storageRef.downloadUrl
+        }?.addOnSuccessListener{uri->
+            var contentDTO = ContentDTO()
 
+            val uid = FirebaseAuth.getInstance().currentUser?.uid
+            val docRef = FirebaseFirestore.getInstance().collection("users").document(uid!!)
+            docRef.get()
+                .addOnSuccessListener{documentSnapshot->
+                    if (documentSnapshot.exists()) {
+                        val nickname = documentSnapshot.getString("nickname")
+                        Log.d("Name", " $nickname")
+                        contentDTO.usernickname = nickname.toString()
 
-                            //Insert downloadUrl of image
-                            contentDTO.imageUri = uri.toString()
+                        //Insert downloadUrl of image
+                        contentDTO.imageUri = uri.toString()
 
-                            //Insert uid of user
-                            contentDTO.uid = auth?.currentUser?.uid
+                        //Insert uid of user
+                        contentDTO.uid = auth?.currentUser?.uid
 
-                            contentDTO.userId = auth?.currentUser?.email
+                        contentDTO.userId = auth?.currentUser?.email
 
-                            contentDTO.title = post_wrt_edittext_title.text.toString()
+                        contentDTO.title = post_wrt_edittext_title.text.toString()
 
-                            contentDTO.explain = post_wrt_edittext_content.text.toString()
+                        contentDTO.explain = post_wrt_edittext_content.text.toString()
 
-                            contentDTO.timestamp = System.currentTimeMillis()
+                        contentDTO.timestamp = System.currentTimeMillis()
 
-                            contentDTO.price =post_wrt_edittext_price.text.toString() + "원"
+                        contentDTO.price =post_wrt_edittext_price.text.toString() + "원"
 
-                            val postId = firestore?.collection("images")?.document()?.id
-                            contentDTO.id = postId
+                        val postId = firestore?.collection("images")?.document()?.id
+                        contentDTO.id = postId
 
-                            firestore?.collection("images")?.document(postId.toString())?.set(contentDTO)
+                        firestore?.collection("images")?.document(postId.toString())?.set(contentDTO)
 
-                        } else {
-                            Log.d(TAG, "No such document")
-                        }
+                    } else {
+                        Log.d(TAG, "No such document")
                     }
-                    .addOnFailureListener { exception ->
-                        Log.d(TAG, "get failed with ", exception)
-                    }
-
-
-
-                setResult(Activity.RESULT_OK)
-                finish()
-            }
-
-            //FileUpload, Callback method
-//            storageRef?.putFile(photoUri!!)?.addOnSuccessListener{
-//                Toast.makeText(this,getString(R.string.upload_success),Toast.LENGTH_LONG).show()
-//                storageRef.downloadUrl.addOnSuccessListener { uri ->
-//                    var contentDTO = ContentDTO()
-//
-//                    //Insert downloadUrl of image
-//                    contentDTO.imageUri = uri.toString()
-//
-//                    //Insert uid of user
-//                    contentDTO.uid = auth?.currentUser?.uid
-//
-//                    contentDTO.userId = auth?.currentUser?.email
-//
-//                    contentDTO.explain = addphoto_edit_explain.text.toString()
-//
-//                    contentDTO.timestamp = System.currentTimeMillis()
-//
-//                    firestore?.collection("images")?.document()?.set(contentDTO)
-//
-//                    setResult(Activity.RESULT_OK)
-//                    finish()
-//                }
-//            }
+                }
+                .addOnFailureListener{exception->
+                    Log.d(TAG, "get failed with ", exception)
+                }
+            setResult(Activity.RESULT_OK)
+            finish()
         }
-
+    }
 }

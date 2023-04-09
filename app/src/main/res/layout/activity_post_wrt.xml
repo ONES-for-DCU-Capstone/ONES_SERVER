@@ -30,11 +30,11 @@
 
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:scaleType="centerInside"
             android:layout_gravity="right|center"
             android:layout_marginRight="2dp"
-            android:src="@drawable/img_ic_sendbtn"
-            android:background="#00FFFFFF"/>
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_ic_sendbtn" />
 
     </LinearLayout>
 
