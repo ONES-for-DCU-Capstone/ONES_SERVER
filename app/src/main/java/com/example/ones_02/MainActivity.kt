@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         //사진 경로를 가져올수 있는 코드
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1)
 
-        //set default screen
-        bottom_navigation.selectedItemId =R.id.action_home
+        //set default screen  //기본 고정 화면
+        bottom_navigation.selectedItemId =R.id.main_menu_post_feed
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

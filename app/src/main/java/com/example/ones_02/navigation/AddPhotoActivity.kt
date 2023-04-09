@@ -1,23 +1,24 @@
 package com.example.ones_02.navigation
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.util.Log
+import android.widget.*
 import androidx.appcompat.widget.AppCompatButton
 import com.example.ones_02.R
 import com.example.ones_02.navigation.model.ContentDTO
+import com.example.ones_02.navigation.model.UserDTO
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_photo.*
+import kotlinx.android.synthetic.main.activity_post_wrt.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,7 +30,7 @@ class AddPhotoActivity : AppCompatActivity() {
     var firestore: FirebaseFirestore? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_photo)
+        setContentView(R.layout.activity_post_wrt)
 
         //Intitiate Storge 초기화
         storage = FirebaseStorage.getInstance()
@@ -42,9 +43,9 @@ class AddPhotoActivity : AppCompatActivity() {
         startActivityForResult(photoPickerIntent, PICK_IMSGE_FROM_ALBUM)
 
         //add image upload event
-        val addphoto_btn_upload = findViewById<Button>(R.id.addphoto_btn_upload)
+        val sendbtn = findViewById<ImageButton>(R.id.post_wrt_btn_send)
 
-        addphoto_btn_upload.setOnClickListener{
+        sendbtn.setOnClickListener{
             contentUpload()
         }
     }
@@ -56,7 +57,7 @@ class AddPhotoActivity : AppCompatActivity() {
                 //this is path to the selecte image
                 photoUri = data?.data
 
-                val addphoto_image = findViewById<ImageView>(R.id.addphoto_image)
+                val addphoto_image = findViewById<ImageView>(R.id.post_wrt_img_picture)
                 addphoto_image.setImageURI(photoUri)
             } else {
                 //Exit the addPhotoActivity if you leave 사진촬영 취소시
@@ -75,34 +76,54 @@ class AddPhotoActivity : AppCompatActivity() {
 
             //업로드 방식은 2가지 Promise method와 Callback method, 구글에서 Promis method를 더 선호
 
+
             //Promise method
             storageRef?.putFile(photoUri!!)?.continueWithTask{ task: Task<UploadTask.TaskSnapshot> ->
                 return@continueWithTask storageRef.downloadUrl
             }?.addOnSuccessListener { uri ->
                 var contentDTO = ContentDTO()
 
-                val postid = firestore?.collection("images")
+
+                val uid = FirebaseAuth.getInstance().currentUser?.uid
+                val docRef = FirebaseFirestore.getInstance().collection("users").document(uid!!)
+                docRef.get()
+                    .addOnSuccessListener { documentSnapshot ->
+                        if (documentSnapshot.exists()) {
+                            val nickname = documentSnapshot.getString("nickname")
+                            Log.d("Name", " $nickname")
+                            contentDTO.usernickname = nickname.toString()
 
 
-                //Insert downloadUrl of image
-                contentDTO.imageUri = uri.toString()
+                            //Insert downloadUrl of image
+                            contentDTO.imageUri = uri.toString()
 
-                //Insert uid of user
-                contentDTO.uid = auth?.currentUser?.uid
+                            //Insert uid of user
+                            contentDTO.uid = auth?.currentUser?.uid
 
-                contentDTO.userId = auth?.currentUser?.email
+                            contentDTO.userId = auth?.currentUser?.email
 
-                contentDTO.title = addphoto_title.text.toString()
+                            contentDTO.title = post_wrt_edittext_title.text.toString()
 
-                contentDTO.explain = addphoto_edit_explain.text.toString()
+                            contentDTO.explain = post_wrt_edittext_content.text.toString()
 
-                contentDTO.timestamp = System.currentTimeMillis()
+                            contentDTO.timestamp = System.currentTimeMillis()
+
+                            contentDTO.price =post_wrt_edittext_price.text.toString() + "원"
+
+                            val postId = firestore?.collection("images")?.document()?.id
+                            contentDTO.id = postId
+
+                            firestore?.collection("images")?.document(postId.toString())?.set(contentDTO)
+
+                        } else {
+                            Log.d(TAG, "No such document")
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.d(TAG, "get failed with ", exception)
+                    }
 
 
-                val postId = firestore?.collection("images")?.document()?.id
-                contentDTO.id = postId
-
-                firestore?.collection("images")?.document(postId.toString())?.set(contentDTO)
 
                 setResult(Activity.RESULT_OK)
                 finish()

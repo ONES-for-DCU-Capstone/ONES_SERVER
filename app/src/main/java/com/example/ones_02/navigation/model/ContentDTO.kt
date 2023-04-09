@@ -9,6 +9,7 @@ data class ContentDTO(
                       var imageUri : String? = null,
                       var price : String? = null,
                       var uid : String? = null,
+                      var usernickname : String? = null,
                       var userId : String? = null,
                       var timestamp : Long? = null,
                       var favoriteCount : Int? = 0,

@@ -46,7 +46,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="610dp">
+        android:layout_height="555dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,62 +63,57 @@
                     android:id="@+id/post_view_btn_user_profile"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:scaleType="centerInside"
                     android:background="@drawable/shape_profilebtn_circle"
-                    />
+                    android:scaleType="centerInside" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/post_view_text_user_name"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:fontFamily="@font/nanumbarungothic"
-                        android:textSize="20sp"
                         android:text="닉네임"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/post_view_text_wrt_time"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="2dp"
-                        android:textSize="14sp"
                         android:fontFamily="@font/nanumbarungothic"
                         android:text="올린 시간"
-                        android:textColor="#FF898989" />
+                        android:textColor="#FF898989"
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>
 
             </LinearLayout> <!-- 글쓴이 정보 -->
 
-
             <ImageView
                 android:id="@+id/post_view_img_picture"
-
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/shape_img_circleview"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_post_view_ex"
-                android:background="@drawable/shape_img_circleview"/>
+                android:src="@drawable/img_post_view_ex" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -127,14 +122,13 @@
 
                     <TextView
                         android:id="@+id/post_view_title"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nanumbarungothic"
-                        android:textSize="24sp"
                         android:layout_gravity="left|center"
+                        android:fontFamily="@font/nanumbarungothic"
                         android:text="제목"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textSize="24sp" />
 
                     <View
                         android:layout_width="0dp"
@@ -146,34 +140,33 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center"
                         android:layout_marginTop="2dp"
-                        android:textSize="11sp"
                         android:fontFamily="@font/nanumbarungothic"
                         android:text="조회수"
-                        android:textColor="#FF898989" />
+                        android:textColor="#FF898989"
+                        android:textSize="11sp" />
+
                     <TextView
                         android:id="@+id/post_view_watched"
-
                         android:layout_width="wrap_content"
-                        android:layout_gravity="right|center"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_gravity="right|center"
                         android:layout_marginLeft="2dp"
-                        android:textSize="11sp"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/nanumbarungothic"
                         android:text="1"
-                        android:textColor="#FF898989" />
+                        android:textColor="#FF898989"
+                        android:textSize="11sp" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/post_view_content"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textSize="18sp"
                     android:fontFamily="@font/nanumbarungothic"
                     android:text="내용"
-                    android:textColor="#FF898989" />
+                    android:textColor="#FF898989"
+                    android:textSize="18sp" />
             </LinearLayout> <!-- 글 내용 -->
 
         </LinearLayout> <!-- 글 -->
@@ -193,7 +186,6 @@
 
         <TextView
             android:id="@+id/post_view_price"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumbarungothic"
@@ -211,8 +203,6 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/post_view_chat"
-
-
             android:layout_width="90dp"
             android:layout_height="35dp"
             android:fontFamily="@font/nanumbarungothic"
@@ -223,12 +213,7 @@
             android:textStyle="bold"
             android:textColor="#ffffff"
             android:background="@drawable/shape_greenbtn"
-            style="?android:attr/borderlessButtonStyle"
-            />
-
-
+            style="?android:attr/borderlessButtonStyle" />
 
     </LinearLayout> <!-- 하단바 -->
-
-
 </LinearLayout>

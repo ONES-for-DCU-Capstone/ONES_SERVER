@@ -2,12 +2,14 @@ package com.example.ones_02.navigation
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,7 @@ import com.example.ones_02.navigation.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.fragment_postview.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
@@ -35,10 +38,8 @@ class DetailViewFragment : Fragment() {
 
         uid = FirebaseAuth.getInstance().currentUser?.uid
 
-
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
         var contentUidList : ArrayList<String> = arrayListOf()
-
 
         view.detailview_recyclerveiw.adapter = DetailViewRecyclerViewAdapter()
         view.detailview_recyclerveiw.layoutManager = LinearLayoutManager(activity)
@@ -67,8 +68,6 @@ class DetailViewFragment : Fragment() {
             }
         }
 
-
-
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
             var view = LayoutInflater.from(p0.context).inflate(R.layout.item_detail, p0, false)
             return CustomViewHolder(view)
@@ -80,6 +79,7 @@ class DetailViewFragment : Fragment() {
             //서버에서 넘어오는 데이터를 매핑시켜줌
             var viewholder = (p0 as CustomViewHolder).itemView
 
+
             //UserId
 //            viewholder.profile_textview.text = contentDTOs!![p1].userId
 
@@ -88,6 +88,8 @@ class DetailViewFragment : Fragment() {
 
             //title
             viewholder.post_feed_product_title.text = contentDTOs!![p1].title
+
+            viewholder.post_feed_product_price.text = contentDTOs!![p1].price
 
             //Explain of content
 //            viewholder.explain_textview.text = contentDTOs!![p1].explain
@@ -112,30 +114,25 @@ class DetailViewFragment : Fragment() {
 //            }
 
 
-//            val postId = postList[p1].postId
 
-//documentReference.id
+
+            post_feed_bnt_post_wrt.setOnClickListener{
+                val intent = Intent(p0.itemView.context, AddPhotoActivity::class.java)
+                p0.itemView.context.startActivity(intent)
+            }
+
+
 
             p0.itemView.setOnClickListener(View.OnClickListener { view ->
-
                 firestore?.collection("images")?.get()?.addOnSuccessListener { querySnapshot ->
                     // Loop through the documents in the QuerySnapshot
                     for (documentReference in querySnapshot) {
                         // Get the document ID from each DocumentSnapshot
-
-//                        val documentId = querySnapshot.toObject(PostViewFragment::class.java)
-
-//                Log.d("Document ID", documentId)
                     }
                 }
-//                val documentId = contentDTOs!![p1].id
-////                Log.d("Document ID", documentId.toString())
-
 
                 val intent = Intent(view.context, PostViewFragment::class.java)
-
                 intent.putExtra("documentId", contentDTOs[p1].id)
-
 
                 var activityOption: ActivityOptions? = null
 
@@ -180,7 +177,6 @@ class DetailViewFragment : Fragment() {
                         R.anim.fromright,
                         R.anim.toleft
                     )
-
                     Log.d("uid", "$uid")
                     Log.d("ui2", "${contentDTOs[p1].uid}")
 
@@ -201,6 +197,7 @@ class DetailViewFragment : Fragment() {
         override fun getItemCount(): Int {
             return contentDTOs.size
         }
+
 
 //        fun favoriteEvent(position : Int){
 //            //tsDoc
