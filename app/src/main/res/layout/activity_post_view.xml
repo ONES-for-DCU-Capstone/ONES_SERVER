@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FBFBFB"
-    android:orientation="vertical"
-    android:id="@+id/activity_post_view">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,25 +27,47 @@
 
         <ImageButton
             android:id="@+id/post_view_btn_more"
-
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="centerInside"
             android:layout_gravity="right|center"
             android:src="@drawable/img_ic_morebtn"
-            android:background="#00FFFFFF"/>
+            android:background="#00FFFFFF"
+            />
+        <LinearLayout
+            android:id="@+id/more_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/post_view_btn_more"
+            android:layout_centerVertical="true">
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수정"/>
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="삭제"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#E3E3E3"
-        />
+        android:background="#E3E3E3" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="555dp">
+        android:layout_height="559dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,6 +118,7 @@
                 </LinearLayout>
 
             </LinearLayout> <!-- 글쓴이 정보 -->
+
 
             <ImageView
                 android:id="@+id/post_view_img_picture"
@@ -213,7 +235,7 @@
             android:textStyle="bold"
             android:textColor="#ffffff"
             android:background="@drawable/shape_greenbtn"
-            style="?android:attr/borderlessButtonStyle" />
-
+            style="?android:attr/borderlessButtonStyle"
+            />
     </LinearLayout> <!-- 하단바 -->
 </LinearLayout>

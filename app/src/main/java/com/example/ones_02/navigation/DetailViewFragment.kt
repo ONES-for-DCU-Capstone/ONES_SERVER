@@ -68,11 +68,7 @@ class DetailViewFragment : Fragment() {
                 if(querySnapshot == null) return@addSnapshotListener
                 for(snapshot in querySnapshot!!.documents){
                     var item = snapshot.toObject(ContentDTO::class.java)
-//                    val item = snapshot.toObject(ContentDTO::class.java)?.apply {
-//                        this.timestamp = timestamp?.let { Timestamp(it) }
-//                    } ?: ContentDTO() // 만약 snapshot.toObject(ContentDTO::class.java)가 null이라면 새로운 ContentDTO 객체 생성
-
-
+//
                     contentDTOs.add(item!!)
                     contentUidList.add(snapshot.id)
                 }
@@ -99,42 +95,26 @@ class DetailViewFragment : Fragment() {
 
             //title
             viewholder.post_feed_product_title.text = contentDTOs!![p1].title
-
-//            val sdf = SimpleDateFormat("yyyy년-MM월-dd일")
-//            val date = Date(contentDTOs!![p1].timestamp)
-//            viewholder.post_feed_product_time.text = sdf.format(date)
-//            viewholder.post_feed_product_time.text = contentDTOs!![p1].timestamp?.time.toString()
-
-//            viewholder.post_feed_product_time.text = contentDTOs!![p1].timestamp?.toDate()?.toString()
+            viewholder.post_feed_product_price.text = contentDTOs!![p1].price
 
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
             val date = contentDTOs!![p1].timestamp?.toDate()
-            viewholder.post_feed_product_time.text = dateFormat.format(date)
+//            viewholder.post_feed_product_time.text = dateFormat.format(date)
+            if (date != null) {
+                viewholder.post_feed_product_time.text = dateFormat.format(date)
+            } else {
+                viewholder.post_feed_product_time.text = ""
+            }
 
 //            viewholder.post_feed_product_time.text = contentDTOs!![p1].timestamp.toString()
-
-
-//            val tagbutton = viewholder.post_feed_product_tag as AppCompatButton
-//            tagbutton.setText(contentDTOs!![p1].tag)
-
-
-//            val TAG_BUTTON_PADDING = 10
-//            val TAG_BUTTON_WIDTH_BASE = 10
-//
-//            val tagbutton = viewholder.post_feed_product_tag as AppCompatButton
-//            val tag = contentDTOs!![p1].tag
-//            val paint = tagbutton.paint
-//            val tagWidth = paint.measureText(tag) + TAG_BUTTON_PADDING * 2
-//            tagbutton.width = max(tagWidth.toInt(), TAG_BUTTON_WIDTH_BASE)
-//            tagbutton.text = tag
 
             val tagLayout = viewholder.post_feed_product_tag_layout
             val tags = contentDTOs!![p1].tag?.split(",")
 
-// 기존에 있던 버튼들 삭제
+            // 기존에 있던 버튼들 삭제
             tagLayout.removeAllViews()
 
-// 각 태그마다 버튼 생성
+            // 각 태그마다 버튼 생성
             if (tags != null) {
                 for (tag in tags) {
                     val tagButton = AppCompatButton(context!!)
@@ -157,8 +137,6 @@ class DetailViewFragment : Fragment() {
                     tagLayout.addView(tagButton)
                 }
             }
-
-
 
 
 //            val tagLayout = viewholder.post_feed_product_tag_layout
@@ -192,10 +170,6 @@ class DetailViewFragment : Fragment() {
 //            }
 
 
-
-
-            viewholder.post_feed_product_price.text = contentDTOs!![p1].price
-
             //Explain of content
 //            viewholder.explain_textview.text = contentDTOs!![p1].explain
 
@@ -217,7 +191,6 @@ class DetailViewFragment : Fragment() {
 //                //좋아요 버튼 클릭하지 않은 경우
 //                viewholder.favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
 //            }
-
 
             post_feed_bnt_post_wrt.setOnClickListener{
                 val intent = Intent(p0.itemView.context, AddPhotoActivity::class.java)
@@ -295,11 +268,9 @@ class DetailViewFragment : Fragment() {
 //            })
         }
 
-
         override fun getItemCount(): Int {
             return contentDTOs.size
         }
-
 
 //        fun favoriteEvent(position : Int){
 //            //tsDoc

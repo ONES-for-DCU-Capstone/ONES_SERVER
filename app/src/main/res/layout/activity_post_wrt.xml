@@ -30,11 +30,11 @@
 
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:scaleType="centerInside"
             android:layout_gravity="right|center"
             android:layout_marginRight="2dp"
-            android:background="#00FFFFFF"
-            android:scaleType="centerInside"
-            android:src="@drawable/img_ic_sendbtn" />
+            android:src="@drawable/img_ic_sendbtn"
+            android:background="#00FFFFFF"/>
 
     </LinearLayout>
 
@@ -59,8 +59,9 @@
 
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_post_view_ex"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_photo"
+                android:background="#EFEFEF"
                 android:layout_gravity="left|center"/>
 
             <LinearLayout
@@ -133,14 +134,39 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:background="#E3E3E3"
+            />
 
-            android:layout_marginTop="15dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/post_wrt_edittext_tag"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#808080"
+                android:textColorHint="#808080"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:textSize="16sp"
+                android:hint="태그"/> <!-- 태그 입력 시 사용-->
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:background="#E3E3E3"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
             android:orientation="horizontal" >
 
             <TextView
@@ -148,10 +174,50 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumbarungothic"
                 android:textSize="18sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
+                android:text="태그 > "
+                android:textColor="#37c467" />
+
+            <TextView
+                android:id="@+id/post_wrt_tag"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumbarungothic"
+                android:textSize="18sp"
+                android:layout_marginLeft="3dp"
+                android:text="태그"
+                android:textColor="#000000" />
+
+            <ImageButton
+                android:id="@+id/post_wrt_btn_tag_reset"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/img_ic_resetbtn_bold"
+                android:background="#00E3E3E3"/>
+        </LinearLayout> <!-- 태그 자동 생성 시 사용-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E3E3E3"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumbarungothic"
+                android:textSize="18sp"
                 android:text="카테고리 > "
-                android:textColor="#03e34f" />
+                android:textColor="#37c467" />
 
             <TextView
                 android:id="@+id/post_wrt_category"
@@ -160,10 +226,18 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumbarungothic"
                 android:textSize="18sp"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="3dp"
-                android:text="축산물/달걀 "
+                android:text="카테고리"
                 android:textColor="#000000" />
+
+            <ImageButton
+                android:id="@+id/post_wrt_btn_category_reset"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/img_ic_resetbtn_bold"
+                android:background="#00E3E3E3"/>
 
         </LinearLayout>
 
