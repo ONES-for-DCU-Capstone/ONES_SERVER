@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.ones_02.navigation.*
@@ -17,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 return true
             }
             R.id.main_menu_map ->{
-                var gridFragment = GridFragment()
+                var gridFragment = MapFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content, gridFragment).commit()
                 return true
             }
@@ -54,7 +52,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
             R.id.main_menu_chat ->{
                 var chatFragment = ChatListFragment()
-//                supportFragmentManager.beginTransaction().replace(R.id.main_content,chatFragment).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.main_content,chatFragment).commit()
                 return true
             }
             R.id.main_menu_profile ->{

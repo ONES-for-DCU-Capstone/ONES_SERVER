@@ -19,7 +19,8 @@ import com.example.ones_02.navigation.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_user.view.*
+import kotlinx.android.synthetic.main.frag_my_profile.*
+import kotlinx.android.synthetic.main.frag_my_profile.view.*
 
 class UserFragment : Fragment() {
     var fragmentView : View? = null
@@ -37,24 +38,39 @@ class UserFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentView = LayoutInflater.from(activity).inflate(R.layout.fragment_user,container,false)
+        fragmentView = LayoutInflater.from(activity).inflate(R.layout.frag_my_profile,container,false)
         uid =arguments?.getString("destinationUid")
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         currentUserUid = auth?.currentUser?.uid
 
+        println("-------------------")
+        println(uid)
+
+        println(auth)
+
+        println(currentUserUid)
+
         //
         if(uid == currentUserUid){
             //myPage
-            fragmentView?.account_btn_follow_signout?.text = getString(R.string.signout)
-            fragmentView?.account_btn_follow_signout?.setOnClickListener {
+//            fragmentView?.account_btn_follow_signout?.text = getString(R.string.signout)
+            fragmentView?.myprofile_btn_logout?.setOnClickListener {
                 activity?.finish()
                 startActivity(Intent(activity,LoginActivity::class.java))
                 auth?.signOut()
             }
+
+            fragmentView?.myprofile_btn_location?.setOnClickListener {
+                val intent = Intent(activity, LocationAuthActivity::class.java)
+                startActivity(intent)
+            }
+
+
+
         }else{
             //OtherPage
-            fragmentView?.account_btn_follow_signout?.text = getString(R.string.send)
+//            fragmentView?.account_btn_follow_signout?.text = getString(R.string.send)
             var mainActivity = (activity as MainActivity)
 //            mainActivity?.toolbar_username?.text = arguments?.getString("userId")
 //            mainActivity?.toolbar_btn_back?.setOnClickListener {
@@ -64,15 +80,16 @@ class UserFragment : Fragment() {
 //            mainActivity?.toolbar_username?.visibility = View.VISIBLE
 //            mainActivity?.toolbar_btn_back?.visibility = View.VISIBLE
         }
-        fragmentView?.account_recyclerview?.adapter = UserFragmentRecyclerViewAdapter()
-        fragmentView?.account_recyclerview?.layoutManager = GridLayoutManager(activity, 3)
+//        fragmentView?.account_recyclerview?.adapter = UserFragmentRecyclerViewAdapter()
+//        fragmentView?.account_recyclerview?.layoutManager = GridLayoutManager(activity, 3)
 
-        fragmentView?.account_iv_profile?.setOnClickListener{
+        fragmentView?.myprofile_img_picture?.setOnClickListener{
             var photoPickerIntent = Intent(Intent.ACTION_PICK)
             photoPickerIntent.type = "image/*"
             activity?.startActivityForResult(photoPickerIntent, PICK_PROFILE_FROM_ALBUM)
         }
         getProfileImage()
+        getName()
         return fragmentView
     }
     fun getProfileImage(){
@@ -80,7 +97,17 @@ class UserFragment : Fragment() {
             if(documentSnapshot == null) return@addSnapshotListener
             if(documentSnapshot.data != null){
                 var url = documentSnapshot?.data!!["image"]
-                Glide.with(requireActivity()).load(url).apply(RequestOptions().circleCrop()).into(fragmentView?.account_iv_profile!!)
+                Glide.with(requireActivity()).load(url).apply(RequestOptions().circleCrop()).into(fragmentView?.myprofile_img_picture!!)
+            }
+        }
+    }
+
+    fun getName(){
+
+        firestore?.collection("users")?.document(uid!!)?.get()
+            ?.addOnSuccessListener { document ->
+                if (document != null) {
+                myprofile_text_username.text = document.getString("nickname")
             }
         }
     }
@@ -96,8 +123,8 @@ class UserFragment : Fragment() {
                     for (snapshot in querySnapshot.documents){
                         contentDTOs.add(snapshot.toObject(ContentDTO::class.java)!!)
                     }
-                    fragmentView?.account_post_textview?.text = contentDTOs.size.toString()
-                    notifyDataSetChanged()
+//                    fragmentView?.account_post_textview?.text = contentDTOs.size.toString()
+//                    notifyDataSetChanged()
             }
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

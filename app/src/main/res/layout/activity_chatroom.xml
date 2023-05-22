@@ -29,7 +29,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatroomActibityRecyclerView"
         android:layout_width="0dp"
@@ -55,7 +54,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-<!--    android:backgroundTint="@color/orange"-->
+    android:backgroundTint="@color/orange"
 
 </androidx.constraintlayout.widget.ConstraintLayout>

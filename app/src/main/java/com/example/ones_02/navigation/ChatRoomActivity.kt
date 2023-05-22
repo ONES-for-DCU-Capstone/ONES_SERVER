@@ -40,9 +40,7 @@ class ChatRoomActivity : AppCompatActivity() {
     private var firestore = FirebaseFirestore.getInstance()
 
     private var messageActivity_textView_topName : TextView? = null
-
     private var messageItem_textview_name : TextView? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +56,6 @@ class ChatRoomActivity : AppCompatActivity() {
         editText = findViewById(R.id.chatmessageEditText) as EditText?
         recyclerView = findViewById(R.id.chatroomActibityRecyclerView) as RecyclerView?
         //message 보낸시간
-
 
 //        val time = Timestamp.now()
 //        val dateFormat = SimpleDateFormat("MMdd 'date' hh:mm:ss")
@@ -77,8 +74,6 @@ class ChatRoomActivity : AppCompatActivity() {
             chatDTO.users[uid.toString()] = true
             chatDTO.users[destinationUid!!] = true
 
-//            chatDTO.users.put(uid.toString(), true)
-//            chatDTO.users.put(destinationUid!!, true)
 //          firestore?.collection("chatroom")?.add(chatDTO)   //Firestore 일때 사용.
 //          fireDatabase.child("chatrooms").push().setValue(chatDTO)
 
@@ -92,15 +87,14 @@ class ChatRoomActivity : AppCompatActivity() {
                         checkChatRoom()
 
                         Log.d("유저222", "$uid")
+                        Log.d("유저222", "$destinationUid")
 
-                        Log.d("유저documentfeferenccc", "${documentReference.id}")
+                        Log.d("유저documentfef", "${documentReference.id}")
                         Log.d("유저uid222", "$uid")
                         //메세지 보내기
                         Handler().postDelayed({
 //                            println("ddddddddd")
                             println(documentReference.id)
-
-
                             chatRoomsRef.document(documentReference.id).collection("comments").add(comment)
                             chatmessageEditText.text = null
                         }, 1000L)
